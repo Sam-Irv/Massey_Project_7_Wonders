@@ -1,20 +1,93 @@
+﻿<!DOCTYPE html>
 <html>
-
 <head>
-    <meta charset="utf-8">
-    <title>React-Redux-Flask</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/png" href="./src/images/favicon.png"/>
-    <link rel="stylesheet" type="text/css" href="dist/bundle.css"/>
-    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500' rel='stylesheet' type='text/css'>
+
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0" />
+    <meta name="author" content="Group Capstone" />
+    <meta name="description" content="7 Wonders Board game" />
+    <meta name="keywords" content="7 wonders" />
+		
+ 	<link href="layout.css" rel="stylesheet" media="screen and (min-width: 501px)" />
+ 	
+	
+	<title>7 WOnders</title>
+
+<script>
+function myFunction(selected) {
+    var cards = document.getElementsByClassName("card")
+	
+	for (i=0; i<cards.length; i++) {
+		cards[i].style.display = "none";
+	}
+	
+	
+}
+</script>
+
 
 </head>
 
 <body>
-<div id="root"></div>
+
+	<header>
+		<hgroup>
+		<img id="logo" src="src/components/icons/7w_logo.png" alt="7 Wonders Logo" /><h2 id="playerName">Player: Marthijn</h2>
+		<nav class="horizontal">
+			<ul>
+				<a href="home.html"><li>HOME</li></a>
+				<a href="Rules.html"><li>Rules</li></a>
+				<a href="Quit.html"><li>Quit</li></a>
+			</ul>
+		</nav>
+		</hgroup>
+	</header>
+	
+	<section id="main2">
+		<hr>
+		<div id="boards">
+			
+			
+			<div id="leftArrow"><img class="left" src="src/components/icons/left.png" /></div>
+		
+			<div id="city"><img class="city" src="src/components/cities/rhodosA.png" /></div>
+			
+			<div id="rightArrow"><img class="right" src="src/components/icons/right.png" /></div>
+		
+		</div>
+		
+		<div id="playingCards">
+		<br /> <br />
+		<div id="cardsInHand">
+			<img class="card" name="1" src="src/components/cards/academy.png" alt="Academy Card" onclick="myFunction(Academy)" />
+			<img class="card" src="src/components/cards/baths.png" alt="Baths Card"  onclick="myFunction(Baths)"/>
+			<img class="card" src="src/components/cards/circus.png" alt="circus card"  onclick="myFunction(circus)"/>
+			<img class="card" src="src/components/cards/laboratory.png" alt="laboratory Card"  onclick="myFunction(laboratory)"/>
+			<img class="card" src="src/components/cards/quarry.png" alt="quarry Card"  onclick="myFunction(quarry)"/>	
+			<img class="card" src="src/components/cards/timberyard.png" alt="timberyard card"  onclick="myFunction(timberyard)"/>	
+			<img class="card" src="src/components/cards/shipownersguild.png" alt="shipownersguild card"  onclick="myFunction(shipownersguild)"/>
+			<img class="card" src="src/components/cards/stonepit.png" alt="stonepit Card"  onclick="myFunction(stonepit)"/>		
+		</div>
+		
+		<div id="selectedCard">
+			<img class="card" src="src/components/cards/age2.png" alt="age2 Card"  onclick="myFunction(age2)"/>	
+			<button id="playButton">Play</button>
+			<button id="discardButton">Discard</button>
+		</div>
+		
+		</div>
+		
+	</section>
+	
+	<footer>
+		
+		<hr>
+		<address>
+			7 Wonders Online created by: Capstone Internal Group 3
+		</address>
+	</footer>
+
+
 </body>
-
-<script src="dist/bundle.js"></script>
-
 </html>
