@@ -295,7 +295,7 @@ def prepare_db_changes_after_turn(card, player, is_discarded, for_wonder, game_i
 
     rounds = []
     for unplayed_card in old_round_list:
-        rounds.append(Round(playerId=get_next_player_id(player, game_info.age), age=game_info.age, round=game_info.round + 1,
+        rounds.append(Round(playerId=player.id, age=game_info.age, round=game_info.round + 1,
                             cardId=unplayed_card))
 
     db_committing_function(p=player, h=history, r=rounds)
@@ -327,7 +327,7 @@ def process_card(card, player, is_discarded, for_wonder):
     game_info = Game.query.filter_by(id=player.gameId).first()
 
     # Guards against more than one card being played in a round
-    if Round.query.filter_by(age=game_info.age, round=game_info.round+1, playerId=get_next_player_id(player, game_info.age)).all():
+    if Round.query.filter_by(age=game_info.age, round=game_info.round+1, playerId=player.id).all():
         return False
 
     if is_discarded:
@@ -340,7 +340,9 @@ def process_card(card, player, is_discarded, for_wonder):
             card = get_wonder_card(player)
         if card is False or check_valid_move(card, player) is False:
             return False
-        print(str(card.id) + " is used for wonder or is processed")
+            print(str(card.id) + " is used for wonder or is processed")
+
+        print(str(card.id) + " - card id played")
         update_player_object(card, player, for_wonder)
 
     # UPDATE DB
