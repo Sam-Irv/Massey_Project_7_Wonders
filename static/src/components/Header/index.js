@@ -61,6 +61,10 @@ export class Header extends Component {
         });
     }
 
+    buttonEndGame() {
+        document.getElementById("EndGame_Button").click();
+    }
+
     render() {
         return (
             <header>
@@ -123,6 +127,7 @@ export class Header extends Component {
                     }
                 </LeftNav>
                 <AppBar
+                  id="AppBar"
                   title="7 Wonders"
                   className="Nav"
                   onLeftIconButtonTouchTap={() => this.openNav()}
@@ -132,6 +137,7 @@ export class Header extends Component {
                         :
                         <div>
                           <FlatButton style={{ color: 'white', margin: 9 }} label={`Signed in (${this.props.userName})`} onClick={() => this.dispatchNewRoute('/home')} />
+                          <FlatButton style={{ color: 'white', margin: 9 }} label="End Game" onClick={() => this.buttonEndGame()} />
                           <FlatButton style={{ color: 'white', margin: 9 }} label="Home" onClick={() => this.dispatchNewRoute('/')} />
                         </div>
 
