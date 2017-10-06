@@ -227,19 +227,7 @@ export class Play extends React.Component {
                     </div>
                 }
                 {game &&
-                    <RaisedButton
-                        label="End Game"
-                        primary={primary}
-                        style={{
-                            float: 'right',
-                            display: 'block',
-                            margin: '0 0 20px 0',
-                        }}
-                        onClick={() => this.endGameDialog()}
-                    />
-                }
-                {game &&
-                    <div style={{ clear: 'both' }}>
+                    <div style={{ float: 'left' }}>
                         <GameScreen playerId={playerId} setPollId={this.setPollId} />
                     </div>
                 }
@@ -252,6 +240,20 @@ export class Play extends React.Component {
                     >
                       Ending the game cannot be undone and ends it for all players.
                     </Dialog>
+                }
+                {game &&
+                    <FlatButton
+                        id="EndGame_Button"
+                        label=""
+                        primary={primary}
+                        style={{
+                            float: 'right',
+                            display: 'block',
+                            margin: '0 0 20px 0',
+                            backgroundColor: 'white',
+                        }}
+                        onClick={() => this.endGameDialog()}
+                    />
                 }
             </div>
         );
