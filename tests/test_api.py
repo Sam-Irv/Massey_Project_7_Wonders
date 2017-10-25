@@ -157,7 +157,7 @@ class TestAPIAlchemy(TestCase):
 
         token = auth.generate_token(user)
         res = self.client.get(
-            "/api/game/create?single_player=true",
+            "/api/game/create?single_player=true&ai_players=6",
             headers={
                 'Authorization': token,
             }
@@ -168,7 +168,7 @@ class TestAPIAlchemy(TestCase):
 
         self.assertEqual(res.status_code, 200)
         assert b'"player_id": 1' in res.data
-        assert b'"playerCount": 3' in res.data
+        assert b'"playerCount": 7' in res.data
         self.assertTrue(game.single_player)
 
     def test_game_status_not_started(self):
