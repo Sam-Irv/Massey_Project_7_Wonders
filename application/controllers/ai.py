@@ -133,98 +133,98 @@ def rank_move(player, card, round, trade_dict):
         #bonus when low on money
         score += 2*card.age - player.money
     
-    
-    if card.name == 'Marketplace':
-        if player.glass == 0 and (neighbours[0].glass > 0 or neighbours[1].glass > 0):
-            score += advanced_trade_weight
-        if player.paper == 0 and (neighbours[0].paper > 0 or neighbours[1].paper > 0):
-            score += advanced_trade_weight
-        if player.cloth == 0 and (neighbours[0].cloth > 0 or neighbours[1].cloth > 0):
-            score += advanced_trade_weight
+    if card.colour == 'yellow':
+        if card.name == 'Marketplace':
+            if player.glass == 0 and (neighbours[0].glass > 0 or neighbours[1].glass > 0):
+                score += advanced_trade_weight
+            if player.paper == 0 and (neighbours[0].paper > 0 or neighbours[1].paper > 0):
+                score += advanced_trade_weight
+            if player.cloth == 0 and (neighbours[0].cloth > 0 or neighbours[1].cloth > 0):
+                score += advanced_trade_weight
+                
+        elif card.name == 'West Trading Post':
+            score += max([3*neighbours[0].stone - (player.stone + player.extra_stone*extra_resources), 0])*normal_trade_weight
+            score += max([3*neighbours[0].ore - (player.ore + player.extra_ore*extra_resources), 0])*normal_trade_weight
+            score += max([3*neighbours[0].brick - (player.brick + player.extra_brick*extra_resources), 0])*normal_trade_weight
+            score += max([3*neighbours[0].wood - (player.wood + player.extra_wood*extra_resources), 0])*normal_trade_weight
+        elif card.name == 'East Trading Post':
+            score += max([3*neighbours[1].stone - (player.stone + player.extra_stone*extra_resources), 0])*normal_trade_weight
+            score += max([3*neighbours[1].ore - (player.ore + player.extra_ore*extra_resources), 0])*normal_trade_weight
+            score += max([3*neighbours[1].brick - (player.brick + player.extra_brick*extra_resources), 0])*normal_trade_weight
+            score += max([3*neighbours[1].wood - (player.wood + player.extra_wood*extra_resources), 0])*normal_trade_weight
             
-    elif card.name == 'West Trading Post':
-        score += max([3*neighbours[0].stone - (player.stone + player.extra_stone*extra_resources), 0])*normal_trade_weight
-        score += max([3*neighbours[0].ore - (player.ore + player.extra_ore*extra_resources), 0])*normal_trade_weight
-        score += max([3*neighbours[0].brick - (player.brick + player.extra_brick*extra_resources), 0])*normal_trade_weight
-        score += max([3*neighbours[0].wood - (player.wood + player.extra_wood*extra_resources), 0])*normal_trade_weight
-    elif card.name == 'East Trading Post':
-        score += max([3*neighbours[1].stone - (player.stone + player.extra_stone*extra_resources), 0])*normal_trade_weight
-        score += max([3*neighbours[1].ore - (player.ore + player.extra_ore*extra_resources), 0])*normal_trade_weight
-        score += max([3*neighbours[1].brick - (player.brick + player.extra_brick*extra_resources), 0])*normal_trade_weight
-        score += max([3*neighbours[1].wood - (player.wood + player.extra_wood*extra_resources), 0])*normal_trade_weight
-        
-    elif card.name == 'Vineyard':
-        if card.giveMoney and player.money < 2*card.age:
-            #bonus when low on money
-            score += 2*card.age - player.money
-        cards_holder = [get_cards(player=neighbours[0], history=True), get_cards(player=player, history=True), get_cards(player=neighbours[1], history=True)]
-        score += player.brown + neighbours[0].brown + neighbours[1].brown
-    elif card.name == 'Bazaar':
-        if card.giveMoney and player.money < 2*card.age:
-            #bonus when low on money
-            score += 2*card.age - player.money
-        score += 2*(player.grey + neighbours[0].grey + neighbours[1].grey)
-        
-    elif card.name == 'Haven':
-        if card.giveMoney and player.money < 2*card.age:
-            #bonus when low on money
-            score += 2*card.age - player.money
-        score += 4*player.brown
-    elif card.name == 'Chamber Of Commerce':
-        if card.giveMoney and player.money < 2*card.age:
-            #bonus when low on money
-            score += 2*card.age - player.money
-        score += 8*player.grey
-    elif card.name == 'Lighthouse':
-        if card.giveMoney and player.money < 2*card.age:
-            #bonus when low on money
-            score += 2*card.age - player.money
-        score += 4*player.yellow
-        #potential for more
-        score += potential_weight*(6-round)
-    elif card.name == 'Arena':
-        if card.giveMoney and player.money < 2*card.age:
-            #bonus when low on money
-            score += 2*card.age - player.money
-        score += 6*player.wonder_level
-        #potential for more
-        score += potential_weight*(6-round)
-        
-    elif card.name == 'Workers Guild':
-        score += 3*(neighbours[0].brown + neighbours[1].brown)
-    elif card.name == 'Craftmens Guild':
-        score += 6*(neighbours[0].grey + neighbours[1].grey)
-    elif card.name == 'Traders Guild':
-        score += 3*(neighbours[0].yellow + neighbours[1].yellow)
-        #potential for more
-        score += potential_weight*(6-round)
-    elif card.name == 'Philosophers Guild':
-        score += 3*(neighbours[0].green + neighbours[1].green)
-        #potential for more
-        score += potential_weight*(6-round)
-    elif card.name == 'Spies Guild':
-        score += 3*(neighbours[0].red + neighbours[1].red)
-        #potential for more
-        score += potential_weight*(6-round)
-    elif card.name == 'Magistrates Guild':
-        score += 3*(neighbours[0].blue + neighbours[1].blue)
-        #potential for more
-        score += potential_weight*(6-round)
-        
-    elif card.name == 'Builders Guild':
-        score += 3*(player.wonder_level + neighbours[0].wonder_level + neighbours[1].wonder_level)
-        #potential for more
-        score += potential_weight*(6-round)
+        elif card.name == 'Vineyard':
+            if card.giveMoney and player.money < 2*card.age:
+                #bonus when low on money
+                score += 2*card.age - player.money
+            score += player.brown + neighbours[0].brown + neighbours[1].brown
+        elif card.name == 'Bazaar':
+            if card.giveMoney and player.money < 2*card.age:
+                #bonus when low on money
+                score += 2*card.age - player.money
+            score += 2*(player.grey + neighbours[0].grey + neighbours[1].grey)
+            
+        elif card.name == 'Haven':
+            if card.giveMoney and player.money < 2*card.age:
+                #bonus when low on money
+                score += 2*card.age - player.money
+            score += 4*player.brown
+        elif card.name == 'Chamber Of Commerce':
+            if card.giveMoney and player.money < 2*card.age:
+                #bonus when low on money
+                score += 2*card.age - player.money
+            score += 8*player.grey
+        elif card.name == 'Lighthouse':
+            if card.giveMoney and player.money < 2*card.age:
+                #bonus when low on money
+                score += 2*card.age - player.money
+            score += 4*player.yellow
+            #potential for more
+            score += potential_weight*(6-round)
+        elif card.name == 'Arena':
+            if card.giveMoney and player.money < 2*card.age:
+                #bonus when low on money
+                score += 2*card.age - player.money
+            score += 6*player.wonder_level
+            #potential for more
+            score += potential_weight*(6-round)
     
-    elif card.name == 'Strategists Guild':
-        score += 3*(neighbours[0].military_loss + neighbours[1].military_loss)
-        #potential for more
-        score += potential_weight*(6-round)
-    
-    elif card.name == 'Shipowners Guild':
-        score += 3*(player.brown + player.grey + player.purple)
-        #potential for more
-        score += potential_weight*(6-round)
+    if card.colour == 'purple': 
+        if card.name == 'Workers Guild':
+            score += 3*(neighbours[0].brown + neighbours[1].brown)
+        elif card.name == 'Craftmens Guild':
+            score += 6*(neighbours[0].grey + neighbours[1].grey)
+        elif card.name == 'Traders Guild':
+            score += 3*(neighbours[0].yellow + neighbours[1].yellow)
+            #potential for more
+            score += potential_weight*(6-round)
+        elif card.name == 'Philosophers Guild':
+            score += 3*(neighbours[0].green + neighbours[1].green)
+            #potential for more
+            score += potential_weight*(6-round)
+        elif card.name == 'Spies Guild':
+            score += 3*(neighbours[0].red + neighbours[1].red)
+            #potential for more
+            score += potential_weight*(6-round)
+        elif card.name == 'Magistrates Guild':
+            score += 3*(neighbours[0].blue + neighbours[1].blue)
+            #potential for more
+            score += potential_weight*(6-round)
+            
+        elif card.name == 'Builders Guild':
+            score += 3*(player.wonder_level + neighbours[0].wonder_level + neighbours[1].wonder_level)
+            #potential for more
+            score += potential_weight*(6-round)
+        
+        elif card.name == 'Strategists Guild':
+            score += 3*(neighbours[0].military_loss + neighbours[1].military_loss)
+            #potential for more
+            score += potential_weight*(6-round)
+        
+        elif card.name == 'Shipowners Guild':
+            score += 3*(player.brown + player.grey + player.purple)
+            #potential for more
+            score += potential_weight*(6-round)
     
     score += random.gauss(0, 2) #a little bit of randomization never hurt anyone
     return score
