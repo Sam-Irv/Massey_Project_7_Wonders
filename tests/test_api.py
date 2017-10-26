@@ -61,7 +61,7 @@ class TestAPI(BaseTestConfig):
                 content_type='application/json'
         )
 
-        self.assertEqual(res3.status_code, 403)
+        self.assertEqual(res3.status_code, 401)
 
         res4 = self.app.post(
                 "/api/get_token",
