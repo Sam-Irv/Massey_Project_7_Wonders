@@ -2,7 +2,7 @@ from .database_functions import *
 from .card_logic import *
 import random
 
-def rank_move(player, card, round):
+def rank_move(player, card, round, trade_dict):
     """ 
     ranks how good a certain card is to play
     used by the ai to choose next move
@@ -16,8 +16,7 @@ def rank_move(player, card, round):
     #costs
     score -= card.costMoney
     
-    #penalty for losing money
-    trade_dict = check_move_and_trade(card, player)
+    #penalty for losing money to trade
     score -= trade_dict['left']['cost'] + trade_dict['right']['cost']
 
     # Gather resources
@@ -91,6 +90,9 @@ def rank_move(player, card, round):
             elif player.military - n.military > -2*card.giveMilitary:
                 #this card won't be enough, but might be worth trying to get there?
                 score += card.giveMilitary*military_weight
+            else:
+                #opponent too far ahead, don't bother trying
+                score += 0
 
     # wonder_cards = get_all_wonder_cards(player)
 
