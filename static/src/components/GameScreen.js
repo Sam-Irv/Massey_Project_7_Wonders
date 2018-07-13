@@ -85,7 +85,7 @@ export class GameScreen extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.cardValid === false ) {
+        if (nextProps.cardValid === false) {
             console.log('INVALID')
             this.setState({
                 showInvalidMoveError: true,
@@ -395,9 +395,9 @@ export class GameScreen extends Component {
                                     onRequestClose={this.hideAgeDialog}
                                     contentStyle={{ width: '40%' }}
                                 >
-                                  <center><div>
-                                      <img alt="Age_image" height='150' src={`dist/images/icons/age${game.game.age}cards.png`} />
-                                  </div></center>
+                                    <center><div>
+                                        <img alt="Age_image" height='150' src={`dist/images/icons/age${game.game.age}cards.png`} />
+                                    </div></center>
                                 </Dialog>
                             }
                             {this.state.armyDialog && !this.state.armyDialogDisplayOnce &&
